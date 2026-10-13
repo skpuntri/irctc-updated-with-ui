@@ -87,12 +87,12 @@ import { Train, TrainRoute, Station } from '../../../core/models/train.model';
           @for (r of sortedRoutes(); track r.id) {
             <tr>
               <td><span class="order-badge">#{{ r.stationOrder }}</span></td>
-              <td><strong>{{ r.station?.name }}</strong></td>
-              <td><span class="code-badge">{{ r.station?.code }}</span></td>
+              <td><strong>{{ r.station.name }}</strong></td>
+              <td><span class="code-badge">{{ r.station.code }}</span></td>
               <td>{{ r.arrivalTime || '--:--' }}</td>
               <td>{{ r.departureTime || '--:--' }}</td>
-              <td>{{ r.haltMinutes ?? 0 }} min</td>
-              <td>{{ r.distanceFromSource ?? 0 }} km</td>
+              <td>{{ r.haltMinutes }} min</td>
+              <td>{{ r.distanceFromSource }} km</td>
               <td class="actions">
                 <button (click)="openEdit(r)" class="btn-edit">Edit</button>
                 <button (click)="deleteRoute(r.id)" class="btn-delete">Delete</button>

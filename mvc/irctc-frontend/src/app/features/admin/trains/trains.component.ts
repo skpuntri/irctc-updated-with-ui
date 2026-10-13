@@ -74,6 +74,7 @@ import { Train } from '../../../core/models/train.model';
               <td>{{ t.destinationStation?.code || '—' }}</td>
               <td class="actions">
                 <a [routerLink]="['/admin/trains', t.id, 'routes']" class="btn-route">🛤️ Stops</a>
+                <a [routerLink]="['/admin/trains', t.id, 'schedules']" class="btn-schedule">📅 Dates</a>
                 <button (click)="openEdit(t)" class="btn-edit">Edit</button>
                 <button (click)="deleteTrain(t.id)" class="btn-delete">Delete</button>
               </td>
@@ -101,6 +102,8 @@ import { Train } from '../../../core/models/train.model';
     .actions { display:flex; gap:0.4rem; align-items:center; }
     .btn-route { background:#e8eaf6; color:#1a237e; padding:0.35rem 0.65rem; border-radius:4px; text-decoration:none; font-weight:600; font-size:0.82rem; }
     .btn-route:hover { background:#c5cae9; }
+    .btn-schedule { background:#e8f5e9; color:#2e7d32; padding:0.35rem 0.65rem; border-radius:4px; text-decoration:none; font-weight:600; font-size:0.82rem; }
+    .btn-schedule:hover { background:#c8e6c9; }
     .btn-edit { background:#fff8e1; color:#f57f17; border:none; padding:0.35rem 0.75rem; border-radius:4px; cursor:pointer; font-weight:600; font-size:0.82rem; }
     .btn-delete { background:#ffebee; color:#c62828; border:none; padding:0.35rem 0.75rem; border-radius:4px; cursor:pointer; font-weight:600; font-size:0.82rem; }
     .empty-row { text-align:center; color:#aaa; padding:2rem; }

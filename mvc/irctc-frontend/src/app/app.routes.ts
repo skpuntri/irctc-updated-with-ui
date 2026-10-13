@@ -72,6 +72,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/admin/train-routes/train-routes.component').then(m => m.TrainRoutesComponent)
       },
       {
+        path: 'trains/:trainId/schedules',
+        loadComponent: () => import('./features/admin/train-schedules/train-schedules.component').then(m => m.TrainSchedulesComponent)
+      },
+      {
         path: 'stations',
         loadComponent: () => import('./features/admin/stations/stations.component').then(m => m.StationsComponent)
       },

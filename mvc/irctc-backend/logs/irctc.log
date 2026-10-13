@@ -1,0 +1,288 @@
+2026-10-13 12:04:27 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-10-13 12:04:27 INFO  [main] c.s.irctc.IrctcBackendApplication - Starting IrctcBackendApplication using Java 21.0.11 with PID 21168 (C:\Users\skpun\BackendX\Github Desktop\backendX-2405\mvc\irctc-backend\target\classes started by skpun in C:\Users\skpun\BackendX\Github Desktop\backendX-2405\mvc\irctc-backend)
+2026-10-13 12:04:27 INFO  [main] c.s.irctc.IrctcBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-10-13 12:04:28 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-13 12:04:28 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 89 ms. Found 11 JPA repository interfaces.
+2026-10-13 12:04:30 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-10-13 12:04:30 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2026-10-13 12:04:30 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-10-13 12:04:30 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.41]
+2026-10-13 12:04:30 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-10-13 12:04:30 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3563 ms
+2026-10-13 12:04:31 INFO  [main] o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-13 12:04:31 INFO  [main] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.15.Final
+2026-10-13 12:04:31 INFO  [main] o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-10-13 12:04:32 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-13 12:04:32 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-10-13 12:04:32 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5b1f5fcc
+2026-10-13 12:04:32 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-10-13 12:04:33 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-13 12:04:33 WARN  [main] org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-10-13 12:04:33 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-13 12:04:34 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-13 12:04:34 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-13 12:04:35 DEBUG [main] c.s.i.c.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-10-13 12:04:35 INFO  [main] o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-13 12:04:35 INFO  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2026-10-13 12:04:36 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-13 12:04:37 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2026-10-13 12:04:37 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2026-10-13 12:04:37 INFO  [main] c.s.irctc.IrctcBackendApplication - Started IrctcBackendApplication in 10.475 seconds (process running for 11.713)
+2026-10-13 12:04:37 INFO  [main] c.s.irctc.IrctcBackendApplication - Initializing roles...
+2026-10-13 12:04:37 WARN  [main] c.s.irctc.IrctcBackendApplication - Initializing roles...
+2026-10-13 12:04:37 ERROR [main] c.s.irctc.IrctcBackendApplication - Initializing roles...
+2026-10-13 12:04:44 INFO  [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-13 12:04:44 INFO  [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-10-13 12:04:44 INFO  [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-10-13 12:04:44 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:04:46 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:04:46 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:04:46 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:04:46 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:04:46 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:04:46 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:04:46 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:04:46 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllFeedbacks 
+2026-10-13 12:04:46 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Time taken 32 ms
+2026-10-13 12:04:46 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllFeedbacks 
+2026-10-13 12:04:46 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - Time taken 105 ms
+2026-10-13 12:04:46 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:05:05 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:05:05 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:05:05 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:05:05 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:05:05 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Time taken 38 ms
+2026-10-13 12:05:05 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:05:33 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:05:33 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:05:33 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Time taken 39 ms
+2026-10-13 12:05:33 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:05:47 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:05:47 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:05:47 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Time taken 17 ms
+2026-10-13 12:05:47 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:07:42 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:07:42 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:07:42 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Time taken 23 ms
+2026-10-13 12:07:42 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:12:02 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:12:02 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:12:02 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:12:02 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:12:02 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Time taken 14 ms
+2026-10-13 12:12:02 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:21:34 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:21:34 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:21:34 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:21:34 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:21:34 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Time taken 13 ms
+2026-10-13 12:21:34 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:22:21 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:22:55 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:22:55 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:22:55 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Time taken 25 ms
+2026-10-13 12:22:55 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:23:13 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:23:13 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:23:13 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:23:13 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:23:13 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Time taken 23 ms
+2026-10-13 12:23:13 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:24:11 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:11 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:11 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:11 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:24:11 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Time taken 14 ms
+2026-10-13 12:24:11 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:24:16 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:16 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:16 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:16 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:16 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:16 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:16 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:16 INFO  [http-nio-8081-exec-10] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainById 
+2026-10-13 12:24:16 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Time taken 13 ms
+2026-10-13 12:24:16 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:16 INFO  [http-nio-8081-exec-10] c.s.irctc.aspects.LoggingAspect - Time taken 24 ms
+2026-10-13 12:24:16 INFO  [http-nio-8081-exec-10] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainById 
+2026-10-13 12:24:26 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:26 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:26 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:26 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Before method Execution createSchedule 
+2026-10-13 12:24:26 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Time taken 165 ms
+2026-10-13 12:24:26 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - After  method Execution createSchedule 
+2026-10-13 12:24:27 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:27 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:27 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:27 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:27 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - Time taken 17 ms
+2026-10-13 12:24:27 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:32 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:32 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:32 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:32 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:32 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:32 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllFeedbacks 
+2026-10-13 12:24:32 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:32 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Time taken 6 ms
+2026-10-13 12:24:32 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllFeedbacks 
+2026-10-13 12:24:32 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:24:32 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Time taken 18 ms
+2026-10-13 12:24:32 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:24:36 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:36 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:36 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:36 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:24:36 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Time taken 16 ms
+2026-10-13 12:24:36 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:24:45 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:45 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:45 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:45 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:45 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:45 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:45 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainById 
+2026-10-13 12:24:45 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:45 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Time taken 0 ms
+2026-10-13 12:24:45 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:45 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Time taken 11 ms
+2026-10-13 12:24:45 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainById 
+2026-10-13 12:24:51 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:51 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:51 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:51 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Before method Execution createSchedule 
+2026-10-13 12:24:51 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Time taken 27 ms
+2026-10-13 12:24:51 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - After  method Execution createSchedule 
+2026-10-13 12:24:52 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:52 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:52 TRACE [http-nio-8081-exec-9] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:52 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:52 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - Time taken 10 ms
+2026-10-13 12:24:52 INFO  [http-nio-8081-exec-9] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:55 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:55 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:55 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:55 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:24:55 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Time taken 4 ms
+2026-10-13 12:24:55 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:24:57 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:57 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:24:57 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:57 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:24:57 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:57 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:24:57 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainById 
+2026-10-13 12:24:57 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:57 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Time taken 0 ms
+2026-10-13 12:24:57 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:24:57 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Time taken 0 ms
+2026-10-13 12:24:57 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainById 
+2026-10-13 12:25:01 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:01 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:01 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:01 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Before method Execution createSchedule 
+2026-10-13 12:25:01 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Time taken 33 ms
+2026-10-13 12:25:01 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - After  method Execution createSchedule 
+2026-10-13 12:25:01 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:01 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:01 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:01 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:25:01 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Time taken 9 ms
+2026-10-13 12:25:01 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:25:03 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:03 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:03 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:03 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Before method Execution getAllTrains 
+2026-10-13 12:25:03 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Time taken 14 ms
+2026-10-13 12:25:03 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - After  method Execution getAllTrains 
+2026-10-13 12:25:08 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:08 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:08 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:08 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:08 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:08 TRACE [http-nio-8081-exec-3] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:08 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:25:08 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainById 
+2026-10-13 12:25:08 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Time taken 0 ms
+2026-10-13 12:25:08 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:25:08 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - Time taken 0 ms
+2026-10-13 12:25:08 INFO  [http-nio-8081-exec-3] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainById 
+2026-10-13 12:25:21 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:21 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:21 TRACE [http-nio-8081-exec-5] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:21 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - Before method Execution createSchedule 
+2026-10-13 12:25:21 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - Time taken 23 ms
+2026-10-13 12:25:21 INFO  [http-nio-8081-exec-5] c.s.irctc.aspects.LoggingAspect - After  method Execution createSchedule 
+2026-10-13 12:25:21 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:21 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:21 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:21 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Before method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:25:21 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Time taken 9 ms
+2026-10-13 12:25:21 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - After  method Execution getTrainSchedulesByTrainId 
+2026-10-13 12:25:42 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:42 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:42 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:42 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:25:42 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - Time taken 4 ms
+2026-10-13 12:25:42 INFO  [http-nio-8081-exec-8] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:25:59 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:25:59 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:25:59 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:25:59 INFO  [http-nio-8081-exec-10] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:25:59 INFO  [http-nio-8081-exec-10] c.s.irctc.aspects.LoggingAspect - Time taken 9 ms
+2026-10-13 12:25:59 INFO  [http-nio-8081-exec-10] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:26:18 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:26:18 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:26:18 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:26:18 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:26:18 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Time taken 0 ms
+2026-10-13 12:26:18 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:28:56 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:28:56 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:28:56 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:30:42 TRACE [http-nio-8081-exec-7] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:30:42 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:30:42 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - Time taken 8 ms
+2026-10-13 12:30:42 INFO  [http-nio-8081-exec-7] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:33:41 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 12:33:41 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 12:33:41 TRACE [http-nio-8081-exec-1] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 12:33:41 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:33:41 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - Time taken 4 ms
+2026-10-13 12:33:41 INFO  [http-nio-8081-exec-1] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 12:46:56 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 12:46:56 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 12:46:56 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Time taken 38 ms
+2026-10-13 12:46:56 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 13:13:25 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 13:13:25 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 13:13:25 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Time taken 21 ms
+2026-10-13 13:13:25 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 13:16:17 TRACE [http-nio-8081-exec-6] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : null
+2026-10-13 13:16:17 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 13:16:17 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - Time taken 31 ms
+2026-10-13 13:16:17 INFO  [http-nio-8081-exec-6] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 
+2026-10-13 13:17:25 TRACE [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 13:17:25 ERROR [http-nio-8081-exec-8] c.s.i.c.s.JwtAuthenticationFilter - JWT Token has expired
+2026-10-13 13:17:26 TRACE [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODczMjg1LCJleHAiOjE3OTE4NzUwODV9.fxTLyY6YUQHsVUryEUl_gM86LFAksEXSh1zLFq9phjucxwy4OTsIjyGq1WylsGKI6XjYZU4EB9htWhR3Z--V2w
+2026-10-13 13:17:26 ERROR [http-nio-8081-exec-10] c.s.i.c.s.JwtAuthenticationFilter - JWT Token has expired
+2026-10-13 13:17:26 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODc3NjQ2LCJleHAiOjE3OTE4Nzk0NDZ9.58HJAyNICE1M-w21W8qM_-ZT85X5ed4cwklfnnDXSsk_kihDf8XG_z8Gv_CUB4KKD0xQ6oNlCCotp3fhu3-Npw
+2026-10-13 13:17:26 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 13:17:26 TRACE [http-nio-8081-exec-2] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 13:17:26 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Before method Execution listStations 
+2026-10-13 13:17:26 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - Time taken 45 ms
+2026-10-13 13:17:26 INFO  [http-nio-8081-exec-2] c.s.irctc.aspects.LoggingAspect - After  method Execution listStations 
+2026-10-13 13:17:35 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Request to the JWT Filter : Bearer eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwic3ViIjoic2hhaWxlc2hAZ21haWwuY29tIiwiaWF0IjoxNzkxODc3NjQ2LCJleHAiOjE3OTE4Nzk0NDZ9.58HJAyNICE1M-w21W8qM_-ZT85X5ed4cwklfnnDXSsk_kihDf8XG_z8Gv_CUB4KKD0xQ6oNlCCotp3fhu3-Npw
+2026-10-13 13:17:35 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - user name : shailesh@gmail.com
+2026-10-13 13:17:35 TRACE [http-nio-8081-exec-4] c.s.i.c.s.JwtAuthenticationFilter - Authentication set in the Security Context
+2026-10-13 13:17:35 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Before method Execution userTrainSearch 
+2026-10-13 13:17:35 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - Time taken 16 ms
+2026-10-13 13:17:35 INFO  [http-nio-8081-exec-4] c.s.irctc.aspects.LoggingAspect - After  method Execution userTrainSearch 

@@ -167,9 +167,10 @@ export class NewBookingComponent implements OnInit {
     if (user) this.req.userId = user.id;
     // Pre-fill from query params if coming from search
     this.route.queryParams.subscribe(params => {
-      if (params['trainId']) {
-        // trainId can help pre-select schedule
-      }
+      if (params['trainScheduleId']) this.req.trainScheduleId = Number(params['trainScheduleId']);
+      if (params['sourceStationId']) this.req.sourceStationId = Number(params['sourceStationId']);
+      if (params['destinationStationId']) this.req.destinationStationId = Number(params['destinationStationId']);
+      if (params['coachType']) this.req.coachType = params['coachType'] as CoachType;
     });
   }
 

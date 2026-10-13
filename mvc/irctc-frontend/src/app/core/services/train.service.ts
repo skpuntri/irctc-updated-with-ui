@@ -40,6 +40,18 @@ export class TrainService {
     return this.http.get<TrainSchedule[]>(`${environment.apiUrl}/admin/train-schedules/train/${trainId}`);
   }
 
+  createSchedule(schedule: any): Observable<TrainSchedule> {
+    return this.http.post<TrainSchedule>(`${environment.apiUrl}/admin/train-schedules`, schedule);
+  }
+
+  updateSchedule(scheduleId: number, schedule: any): Observable<TrainSchedule> {
+    return this.http.put<TrainSchedule>(`${environment.apiUrl}/admin/train-schedules/${scheduleId}`, schedule);
+  }
+
+  deleteSchedule(scheduleId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/admin/train-schedules/${scheduleId}`);
+  }
+
   getTrainSeats(scheduleId: number): Observable<TrainSeat[]> {
     return this.http.get<TrainSeat[]>(`${environment.apiUrl}/admin/train-seats/schedule/${scheduleId}`);
   }

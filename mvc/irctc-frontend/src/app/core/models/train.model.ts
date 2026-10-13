@@ -45,8 +45,10 @@ export interface TrainSeat {
 export type CoachType = 'AC' | 'SLEEPER' | 'GENERAL';
 
 export interface UserTrainSearchRequest {
-  sourceStationCode: string;
-  destinationStationCode: string;
+  sourceStationId?: number;
+  destinationStationId?: number;
+  sourceStationCode?: string;
+  destinationStationCode?: string;
   journeyDate: string;
 }
 
