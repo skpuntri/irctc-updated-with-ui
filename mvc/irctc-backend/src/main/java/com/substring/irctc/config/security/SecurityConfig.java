@@ -65,6 +65,7 @@ public class SecurityConfig {
                                         "/auth/login",
                                         "/auth/register",
                                         "/auth/refresh-token",
+                                        "/user/trains/search",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**",
                                         "/webjars/**").
