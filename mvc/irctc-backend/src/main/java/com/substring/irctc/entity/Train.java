@@ -24,6 +24,7 @@ public class Train {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true )
     private String number;
 
     private String name;
@@ -54,10 +55,10 @@ public class Train {
     private TrainImage trainImage;
 
 
-    @OneToMany(mappedBy = "train")
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
     private List<TrainRoute> routes;
 
-    @OneToMany(mappedBy = "train")
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
     private  List<TrainSchedule> schedules;
 
 

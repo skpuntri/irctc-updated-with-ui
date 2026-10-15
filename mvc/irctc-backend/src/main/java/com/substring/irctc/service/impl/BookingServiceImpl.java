@@ -88,6 +88,7 @@ public class BookingServiceImpl implements BookingService {
             throw new ResourceNotFoundException("No seats available in this type of coach");
         }
 
+        int nextSeatNumber = getNextSeatNumber(coachToBookSeat);
 
         //book seats
         Booking booking = new Booking();
@@ -119,8 +120,8 @@ public class BookingServiceImpl implements BookingService {
             BookingPassenger passenger = modelMapper.map(bookingPassengerDto, BookingPassenger.class);
             passenger.setBooking(booking);
             passenger.setTrainSeat(coachToBookSeat);
-            passenger.setSeatNumber(coachToBookSeat.getSeatNumberToAssign() + "");
-            coachToBookSeat.setSeatNumberToAssign(coachToBookSeat.getSeatNumberToAssign() + 1);
+            passenger.setSeatNumber(Integer.toString(nextSeatNumber));
+            nextSeatNumber++;
             coachToBookSeat.setAvailableSeats(coachToBookSeat.getAvailableSeats() - 1);
 
             bookingPassengers.add(passenger);
@@ -129,6 +130,7 @@ public class BookingServiceImpl implements BookingService {
         }
 
         booking.setPassengers(bookingPassengers);
+        coachToBookSeat.setSeatNumberToAssign(nextSeatNumber);
 
         Booking savedBooking = bookingRepository.save(booking);
 
@@ -164,5 +166,35 @@ public class BookingServiceImpl implements BookingService {
         bookingResponse.setArrivalTime(sourceRoute.getArrivalTime());
 
         return bookingResponse;
+    }
+
+    private int getNextSeatNumber(TrainSeat coach) {
+        Integer nextSeatNumber = coach.getSeatNumberToAssign();
+        if (nextSeatNumber != null) {
+            return nextSeatNumber;
+        }
+
+        int nextAvailableSeatNumber = 1;
+        for (BookingPassenger passenger : bookingPassengerRepository.findByTrainSeat_Id(coach.getId())) {
+            String assignedSeatNumber = passenger.getSeatNumber();
+            if (assignedSeatNumber == null || assignedSeatNumber.isBlank()) {
+                continue;
+            }
+
+            try {
+                nextAvailableSeatNumber = Math.max(
+                        nextAvailableSeatNumber,
+                        Math.addExact(Integer.parseInt(assignedSeatNumber), 1)
+                );
+            } catch (NumberFormatException | ArithmeticException exception) {
+                throw new IllegalStateException(
+                        "Cannot determine the next seat number for coach " + coach.getId()
+                                + " because an existing seat number is invalid: " + assignedSeatNumber,
+                        exception
+                );
+            }
+        }
+
+        return nextAvailableSeatNumber;
     }
 }

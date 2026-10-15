@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { SlicePipe } from '@angular/common';
 import { FeedbackService } from '../../../core/services/booking.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { FeedbackResponse } from '../../../core/models/booking.model';
+import { FeedbackRequest, FeedbackResponse } from '../../../core/models/booking.model';
 
 @Component({
   selector: 'app-feedback',
@@ -113,7 +113,7 @@ export class FeedbackComponent implements OnInit {
     const userId = this.authService.currentUser()?.id;
     if (userId) {
       this.feedbackService.getMyFeedbacks(userId).subscribe({
-        next: res => { this.myFeedbacks.set(res.content); this.loading.set(false); },
+        next: res => { this.myFeedbacks.set(res?.content ?? []); this.loading.set(false); },
         error: () => this.loading.set(false)
       });
     } else {
@@ -122,11 +122,28 @@ export class FeedbackComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.form.rating === 0) { this.submitError.set('Please select a rating.'); return; }
+    if (this.form.rating === 0) { this.submitError.set('Please select a rating (1-5 stars).'); return; }
+    if (!this.form.title.trim()) { this.submitError.set('Please enter a feedback title.'); return; }
+    if (!this.form.description.trim()) { this.submitError.set('Please enter feedback description.'); return; }
+
+    const user = this.authService.currentUser();
+    if (!user?.id) {
+      this.submitError.set('Please log in to submit feedback.');
+      return;
+    }
+
     this.submitting.set(true);
     this.submitError.set('');
     this.submitSuccess.set(false);
-    this.feedbackService.submitFeedback(this.form).subscribe({
+
+    const payload: FeedbackRequest = {
+      userId: user.id,
+      title: this.form.title.trim(),
+      description: this.form.description.trim(),
+      rating: this.form.rating
+    };
+
+    this.feedbackService.submitFeedback(payload).subscribe({
       next: res => {
         this.submitSuccess.set(true);
         this.submitting.set(false);

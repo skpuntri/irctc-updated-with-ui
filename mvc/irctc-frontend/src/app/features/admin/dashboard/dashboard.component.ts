@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FeedbackService } from '../../../core/services/booking.service';
+import { FeedbackService, BookingService } from '../../../core/services/booking.service';
 import { TrainService } from '../../../core/services/train.service';
 import { FeedbackResponse } from '../../../core/models/booking.model';
 
@@ -31,14 +31,14 @@ import { FeedbackResponse } from '../../../core/models/booking.model';
       <div class="stat-card stat-green">
         <span class="stat-icon">🎫</span>
         <div>
-          <div class="stat-value">—</div>
+          <div class="stat-value">{{ bookingCount() }}</div>
           <div class="stat-label">Total Bookings</div>
         </div>
       </div>
       <div class="stat-card stat-purple">
         <span class="stat-icon">💰</span>
         <div>
-          <div class="stat-value">—</div>
+          <div class="stat-value">₹{{ totalRevenue() }}</div>
           <div class="stat-label">Revenue</div>
         </div>
       </div>
@@ -105,9 +105,12 @@ import { FeedbackResponse } from '../../../core/models/booking.model';
 export class DashboardComponent implements OnInit {
   private feedbackService = inject(FeedbackService);
   private trainService = inject(TrainService);
+  private bookingService = inject(BookingService);
 
   trainCount = signal<number | string>('...');
   feedbackCount = signal<number | string>('...');
+  bookingCount = signal<number | string>('...');
+  totalRevenue = signal<number | string>('...');
   recentFeedbacks = signal<FeedbackResponse[]>([]);
 
   ngOnInit(): void {
@@ -122,5 +125,9 @@ export class DashboardComponent implements OnInit {
       },
       error: () => this.feedbackCount.set('—')
     });
+
+    // Load booking stats from local storage
+    this.bookingCount.set(this.bookingService.getBookingCount());
+    this.totalRevenue.set(this.bookingService.getTotalRevenue());
   }
 }

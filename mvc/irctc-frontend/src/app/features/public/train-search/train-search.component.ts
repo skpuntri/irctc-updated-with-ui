@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TrainService } from '../../../core/services/train.service';
@@ -28,39 +28,89 @@ const DEFAULT_STATIONS: Station[] = [
     <div class="search-card">
       <form (ngSubmit)="search()" class="search-form">
         <div class="form-row">
-          <div class="form-group">
+          <!-- From Station Autocomplete -->
+          <div class="form-group autocomplete-container">
             <label for="srcInput">From Station</label>
-            <input
-              id="srcInput"
-              [(ngModel)]="fromInput"
-              name="src"
-              list="stationsList"
-              placeholder="e.g. NDLS or Station ID"
-              required
-              class="form-control"
-              autocomplete="off"
-            />
+            <div class="input-wrapper">
+              <input
+                id="srcInput"
+                [ngModel]="fromInput()"
+                (ngModelChange)="onFromChange($event)"
+                (focus)="fromFocused.set(true)"
+                (blur)="onBlur('from')"
+                name="src"
+                placeholder="e.g. NDLS or New Delhi"
+                required
+                class="form-control"
+                autocomplete="off"
+              />
+              @if (fromInput()) {
+                <button type="button" class="btn-clear" (mousedown)="clearFrom()" title="Clear">✕</button>
+              }
+            </div>
+
+            @if (fromFocused() && fromSuggestions().length > 0) {
+              <ul class="dropdown-menu">
+                @for (s of fromSuggestions(); track s.id) {
+                  <li class="dropdown-item" (mousedown)="selectFrom(s)">
+                    <div class="station-main">
+                      <span class="station-name">{{ s.name }}</span>
+                      <span class="station-badge">{{ s.code }}</span>
+                    </div>
+                    @if (s.city || s.state) {
+                      <div class="station-sub">{{ s.city }}{{ s.city && s.state ? ', ' : '' }}{{ s.state }}</div>
+                    }
+                  </li>
+                }
+              </ul>
+            }
           </div>
 
+          <!-- Swap Button -->
           <button type="button" class="btn-swap" (click)="swapStations()" title="Swap source and destination">
             ⇄
           </button>
 
-          <div class="form-group">
+          <!-- To Station Autocomplete -->
+          <div class="form-group autocomplete-container">
             <label for="dstInput">To Station</label>
-            <input
-              id="dstInput"
-              [(ngModel)]="toInput"
-              name="dst"
-              list="stationsList"
-              placeholder="e.g. MMCT or Station ID"
-              required
-              class="form-control"
-              autocomplete="off"
-            />
+            <div class="input-wrapper">
+              <input
+                id="dstInput"
+                [ngModel]="toInput()"
+                (ngModelChange)="onToChange($event)"
+                (focus)="toFocused.set(true)"
+                (blur)="onBlur('to')"
+                name="dst"
+                placeholder="e.g. MMCT or Mumbai Central"
+                required
+                class="form-control"
+                autocomplete="off"
+              />
+              @if (toInput()) {
+                <button type="button" class="btn-clear" (mousedown)="clearTo()" title="Clear">✕</button>
+              }
+            </div>
+
+            @if (toFocused() && toSuggestions().length > 0) {
+              <ul class="dropdown-menu">
+                @for (s of toSuggestions(); track s.id) {
+                  <li class="dropdown-item" (mousedown)="selectTo(s)">
+                    <div class="station-main">
+                      <span class="station-name">{{ s.name }}</span>
+                      <span class="station-badge">{{ s.code }}</span>
+                    </div>
+                    @if (s.city || s.state) {
+                      <div class="station-sub">{{ s.city }}{{ s.city && s.state ? ', ' : '' }}{{ s.state }}</div>
+                    }
+                  </li>
+                }
+              </ul>
+            }
           </div>
 
-          <div class="form-group">
+          <!-- Journey Date -->
+          <div class="form-group date-group">
             <label for="jDate">Journey Date</label>
             <input
               id="jDate"
@@ -73,23 +123,18 @@ const DEFAULT_STATIONS: Station[] = [
             />
           </div>
 
+          <!-- Search Button -->
           <button type="submit" class="btn-search" [disabled]="loading()">
             {{ loading() ? 'Searching...' : '🔍 Search Trains' }}
           </button>
         </div>
 
-        <datalist id="stationsList">
-          @for (s of stations(); track s.id) {
-            <option [value]="s.code + ' - ' + s.name + ' (ID: ' + s.id + ')'"></option>
-          }
-        </datalist>
-
-        <!-- Quick station helper pills -->
+        <!-- Quick selection helper pills (Sorted A-Z, zero IDs) -->
         <div class="quick-pills">
-          <span class="pills-label">Quick select:</span>
-          @for (s of stations().slice(0, 6); track s.id) {
+          <span class="pills-label">Popular Stations:</span>
+          @for (s of popularStations(); track s.id) {
             <button type="button" class="pill-btn" (click)="setQuickStation(s)">
-              {{ s.code }} ({{ s.name }})
+              {{ s.name }} ({{ s.code }})
             </button>
           }
         </div>
@@ -148,15 +193,21 @@ const DEFAULT_STATIONS: Station[] = [
                       {{ coach.availableSeats > 0 ? (coach.availableSeats + ' Available') : 'WL / Full' }}
                     </span>
                     <span class="coach-price">₹{{ coach.price }}</span>
-                    @if (auth.isNormalUser() && coach.availableSeats > 0) {
+                    @if (coach.availableSeats > 0) {
                       <a
-                        [routerLink]="['/user/bookings/new']"
-                        [queryParams]="{
+                        [routerLink]="auth.isLoggedIn() ? ['/user/bookings/new'] : ['/auth/login']"
+                        [queryParams]="auth.isLoggedIn() ? {
                           trainScheduleId: train.trainScheduleId,
+                          trainId: train.trainId,
                           sourceStationId: resolvedSourceId(),
                           destinationStationId: resolvedDestId(),
+                          trainName: train.trainName,
+                          trainNumber: train.trainNumber,
+                          sourceName: sourceDisplay(),
+                          destName: destDisplay(),
+                          journeyDate: train.scheduleDate || journeyDate,
                           coachType: coach.coachType
-                        }"
+                        } : {}"
                         class="btn-book-sm"
                       >
                         Book
@@ -171,19 +222,25 @@ const DEFAULT_STATIONS: Station[] = [
             </div>
 
             <div class="train-actions">
-              @if (auth.isNormalUser()) {
+              @if (auth.isLoggedIn()) {
                 <a
                   [routerLink]="['/user/bookings/new']"
                   [queryParams]="{
                     trainScheduleId: train.trainScheduleId,
+                    trainId: train.trainId,
                     sourceStationId: resolvedSourceId(),
-                    destinationStationId: resolvedDestId()
+                    destinationStationId: resolvedDestId(),
+                    trainName: train.trainName,
+                    trainNumber: train.trainNumber,
+                    sourceName: sourceDisplay(),
+                    destName: destDisplay(),
+                    journeyDate: train.scheduleDate || journeyDate
                   }"
                   class="btn-book"
                 >
                   🎫 Book Ticket
                 </a>
-              } @else if (!auth.isLoggedIn()) {
+              } @else {
                 <a routerLink="/auth/login" class="btn-login-to-book">
                   🔐 Login to Book →
                 </a>
@@ -222,16 +279,71 @@ const DEFAULT_STATIONS: Station[] = [
       flex-wrap: wrap;
     }
     .form-group { display: flex; flex-direction: column; flex: 1; min-width: 170px; }
+    .date-group { max-width: 200px; }
     .form-group label { font-size: 0.85rem; font-weight: 600; color: #333; margin-bottom: 0.4rem; }
+    .autocomplete-container { position: relative; }
+    .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
     .form-control {
-      padding: 0.65rem 0.9rem;
+      width: 100%;
+      padding: 0.65rem 2rem 0.65rem 0.9rem;
       border: 1px solid #ddd;
       border-radius: 6px;
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
     .form-control:focus { border-color: #1a237e; box-shadow: 0 0 0 2px rgba(26,35,126,0.1); }
+    .btn-clear {
+      position: absolute;
+      right: 8px;
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 4px;
+      border-radius: 50%;
+    }
+    .btn-clear:hover { color: #333; background: #f0f0f0; }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+      border: 1px solid #e0e0e0;
+      margin: 0;
+      padding: 0.35rem 0;
+      list-style: none;
+      z-index: 1000;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .dropdown-item {
+      padding: 0.6rem 0.9rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      border-bottom: 1px solid #f7f7f7;
+      transition: background 0.15s;
+    }
+    .dropdown-item:last-child { border-bottom: none; }
+    .dropdown-item:hover { background: #f0f4ff; }
+    .station-main { display: flex; justify-content: space-between; align-items: center; }
+    .station-name { font-weight: 600; color: #1a237e; font-size: 0.92rem; }
+    .station-badge {
+      background: #e8eaf6;
+      color: #1a237e;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .station-sub { font-size: 0.75rem; color: #777; }
     .btn-swap {
       height: 40px;
       width: 40px;
@@ -244,7 +356,8 @@ const DEFAULT_STATIONS: Station[] = [
       align-items: center;
       justify-content: center;
       margin-bottom: 2px;
-      transition: background 0.2s;
+      transition: background 0.2s, border-color 0.2s;
+      flex-shrink: 0;
     }
     .btn-swap:hover { background: #e8eaf6; color: #1a237e; border-color: #1a237e; }
     .btn-search {
@@ -273,7 +386,7 @@ const DEFAULT_STATIONS: Station[] = [
       background: #f0f2f5;
       border: 1px solid #e0e0e0;
       border-radius: 14px;
-      padding: 0.2rem 0.65rem;
+      padding: 0.25rem 0.75rem;
       font-size: 0.78rem;
       color: #333;
       cursor: pointer;
@@ -402,9 +515,16 @@ export class TrainSearchComponent implements OnInit {
   auth = inject(AuthService);
 
   today = new Date().toISOString().split('T')[0];
-  fromInput = '';
-  toInput = '';
   journeyDate = this.today;
+
+  fromInput = signal('');
+  toInput = signal('');
+
+  fromFocused = signal(false);
+  toFocused = signal(false);
+
+  selectedFromStation = signal<Station | null>(null);
+  selectedToStation = signal<Station | null>(null);
 
   stations = signal<Station[]>(DEFAULT_STATIONS);
   results = signal<AvailableTrainResponse[]>([]);
@@ -417,8 +537,19 @@ export class TrainSearchComponent implements OnInit {
   sourceDisplay = signal<string>('Source');
   destDisplay = signal<string>('Destination');
 
+  // Popular/default stations sorted alphabetically by name (A-Z)
+  popularStations = computed(() => {
+    return [...this.stations()]
+      .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+      .slice(0, 6);
+  });
+
+  // Filtered dropdown suggestions with smart ranking, sliced to top 8
+  fromSuggestions = computed(() => this.filterStations(this.fromInput()));
+  toSuggestions = computed(() => this.filterStations(this.toInput()));
+
   ngOnInit(): void {
-    // 1. Try to load previously cached stations
+    // 1. Try to load cached stations from localStorage
     try {
       const cached = localStorage.getItem('irctc_stations');
       if (cached) {
@@ -445,59 +576,147 @@ export class TrainSearchComponent implements OnInit {
             }
           }
         },
-        error: () => {
-          // If unauthorized or error, keep DEFAULT_STATIONS / cached
-        }
+        error: () => {}
       });
     }
   }
 
+  // Smart suggestion ranking: Alphabetical & relevance based, top 8 items max
+  private filterStations(query: string): Station[] {
+    const q = (query || '').trim().toUpperCase();
+    const all = this.stations();
+
+    if (!q) {
+      return [...all]
+        .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+        .slice(0, 8);
+    }
+
+    const scored = all.map(s => {
+      const code = (s.code || '').toUpperCase();
+      const name = (s.name || '').toUpperCase();
+      const city = (s.city || '').toUpperCase();
+      let score = 0;
+
+      if (code === q) score += 100;
+      else if (code.startsWith(q)) score += 60;
+      else if (code.includes(q)) score += 20;
+
+      if (name === q) score += 90;
+      else if (name.startsWith(q)) score += 50;
+      else if (name.includes(q)) score += 25;
+
+      if (city.startsWith(q)) score += 30;
+      else if (city.includes(q)) score += 10;
+
+      return { station: s, score };
+    });
+
+    return scored
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score || (a.station.name || '').localeCompare(b.station.name || ''))
+      .slice(0, 8)
+      .map(item => item.station);
+  }
+
+  onFromChange(val: string): void {
+    this.fromInput.set(val);
+    this.selectedFromStation.set(null);
+  }
+
+  onToChange(val: string): void {
+    this.toInput.set(val);
+    this.selectedToStation.set(null);
+  }
+
+  selectFrom(s: Station): void {
+    this.fromInput.set(`${s.name} (${s.code})`);
+    this.selectedFromStation.set(s);
+    this.fromFocused.set(false);
+  }
+
+  selectTo(s: Station): void {
+    this.toInput.set(`${s.name} (${s.code})`);
+    this.selectedToStation.set(s);
+    this.toFocused.set(false);
+  }
+
+  clearFrom(): void {
+    this.fromInput.set('');
+    this.selectedFromStation.set(null);
+  }
+
+  clearTo(): void {
+    this.toInput.set('');
+    this.selectedToStation.set(null);
+  }
+
+  onBlur(type: 'from' | 'to'): void {
+    setTimeout(() => {
+      if (type === 'from') this.fromFocused.set(false);
+      else this.toFocused.set(false);
+    }, 180);
+  }
+
   swapStations(): void {
-    const temp = this.fromInput;
-    this.fromInput = this.toInput;
-    this.toInput = temp;
+    const tempInput = this.fromInput();
+    const tempStation = this.selectedFromStation();
+
+    this.fromInput.set(this.toInput());
+    this.selectedFromStation.set(this.selectedToStation());
+
+    this.toInput.set(tempInput);
+    this.selectedToStation.set(tempStation);
   }
 
   setQuickStation(s: Station): void {
-    if (!this.fromInput) {
-      this.fromInput = `${s.code} - ${s.name} (ID: ${s.id})`;
-    } else if (!this.toInput) {
-      this.toInput = `${s.code} - ${s.name} (ID: ${s.id})`;
+    const formatted = `${s.name} (${s.code})`;
+    if (!this.fromInput()) {
+      this.fromInput.set(formatted);
+      this.selectedFromStation.set(s);
+    } else if (!this.toInput()) {
+      this.toInput.set(formatted);
+      this.selectedToStation.set(s);
     } else {
-      this.fromInput = `${s.code} - ${s.name} (ID: ${s.id})`;
+      this.fromInput.set(formatted);
+      this.selectedFromStation.set(s);
     }
   }
 
-  resolveStationId(input: string): number | null {
+  private resolveStation(input: string, selected: Station | null): Station | null {
+    if (selected) return selected;
     if (!input) return null;
-    const trimmed = input.trim();
-
-    // 1. Check parenthesized ID pattern like "(ID: 1)" or "ID: 1"
-    const match = trimmed.match(/\(ID:\s*(\d+)\)/i) || trimmed.match(/ID:\s*(\d+)/i);
-    if (match) return Number(match[1]);
-
-    // 2. Check pure numeric ID e.g. "1"
-    if (/^\d+$/.test(trimmed)) return Number(trimmed);
-
-    // 3. Match against known station code or name
-    const upper = trimmed.toUpperCase();
+    const trimmed = input.trim().toUpperCase();
     const all = this.stations();
 
-    // Exact code match
-    const byCode = all.find(s => s.code?.toUpperCase() === upper);
-    if (byCode) return byCode.id;
+    // 1. Check parenthesized code e.g. "Varanasi (BSB)"
+    const match = trimmed.match(/\(([A-Z0-9]+)\)/);
+    if (match) {
+      const found = all.find(s => s.code?.toUpperCase() === match[1]);
+      if (found) return found;
+    }
 
-    // Exact name match
-    const byName = all.find(s => s.name?.toUpperCase() === upper);
-    if (byName) return byName.id;
+    // 2. Exact code match
+    const byCode = all.find(s => s.code?.toUpperCase() === trimmed);
+    if (byCode) return byCode;
 
-    // Prefix match (e.g. user typed "NDLS - New Delhi")
+    // 3. Exact name match
+    const byName = all.find(s => s.name?.toUpperCase() === trimmed);
+    if (byName) return byName;
+
+    // 4. Prefix or substring match
     const byPrefix = all.find(s =>
-      upper.startsWith(s.code?.toUpperCase() + ' -') ||
-      upper.startsWith(s.code?.toUpperCase() + ' ') ||
-      upper.includes(s.name?.toUpperCase())
+      trimmed.startsWith(s.code?.toUpperCase() + ' ') ||
+      trimmed.startsWith(s.name?.toUpperCase()) ||
+      s.name?.toUpperCase().startsWith(trimmed)
     );
-    if (byPrefix) return byPrefix.id;
+    if (byPrefix) return byPrefix;
+
+    // 5. Numeric ID fallback (if entered directly without seeing it in UI)
+    if (/^\d+$/.test(trimmed)) {
+      const byId = all.find(s => s.id === Number(trimmed));
+      if (byId) return byId;
+    }
 
     return null;
   }
@@ -507,26 +726,26 @@ export class TrainSearchComponent implements OnInit {
     this.error.set('');
     this.searched.set(true);
 
-    const srcId = this.resolveStationId(this.fromInput);
-    const dstId = this.resolveStationId(this.toInput);
+    const srcStation = this.resolveStation(this.fromInput(), this.selectedFromStation());
+    const dstStation = this.resolveStation(this.toInput(), this.selectedToStation());
 
-    if (!srcId) {
+    if (!srcStation) {
       this.error.set(
-        `Could not identify source station '${this.fromInput}'. Please select a station from the list or enter a numeric Station ID.`
+        `Could not find station '${this.fromInput()}'. Please select from the dropdown or type a valid station code or city.`
       );
       this.loading.set(false);
       return;
     }
 
-    if (!dstId) {
+    if (!dstStation) {
       this.error.set(
-        `Could not identify destination station '${this.toInput}'. Please select a station from the list or enter a numeric Station ID.`
+        `Could not find station '${this.toInput()}'. Please select from the dropdown or type a valid station code or city.`
       );
       this.loading.set(false);
       return;
     }
 
-    if (srcId === dstId) {
+    if (srcStation.id === dstStation.id) {
       this.error.set('Source and destination stations cannot be the same.');
       this.loading.set(false);
       return;
@@ -538,18 +757,15 @@ export class TrainSearchComponent implements OnInit {
       return;
     }
 
-    this.resolvedSourceId.set(srcId);
-    this.resolvedDestId.set(dstId);
+    this.resolvedSourceId.set(srcStation.id);
+    this.resolvedDestId.set(dstStation.id);
 
-    const srcStation = this.stations().find(s => s.id === srcId);
-    const dstStation = this.stations().find(s => s.id === dstId);
-    this.sourceDisplay.set(srcStation ? `${srcStation.name} (${srcStation.code})` : `Station #${srcId}`);
-    this.destDisplay.set(dstStation ? `${dstStation.name} (${dstStation.code})` : `Station #${dstId}`);
+    this.sourceDisplay.set(`${srcStation.name} (${srcStation.code})`);
+    this.destDisplay.set(`${dstStation.name} (${dstStation.code})`);
 
-    // Send numeric sourceStationId & destinationStationId as expected by Spring Boot backend
     const payload: UserTrainSearchRequest = {
-      sourceStationId: srcId,
-      destinationStationId: dstId,
+      sourceStationId: srcStation.id,
+      destinationStationId: dstStation.id,
       journeyDate: this.journeyDate
     };
 

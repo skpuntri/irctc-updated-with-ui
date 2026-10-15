@@ -32,8 +32,8 @@ export class TrainService {
     return this.http.put<Train>(`${environment.apiUrl}/admin/trains/${id}`, train);
   }
 
-  deleteTrain(id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.apiUrl}/admin/trains/${id}`);
+  deleteTrain(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/admin/trains/${id}`, { observe: 'response' });
   }
 
   getTrainSchedules(trainId: number): Observable<TrainSchedule[]> {
@@ -54,6 +54,18 @@ export class TrainService {
 
   getTrainSeats(scheduleId: number): Observable<TrainSeat[]> {
     return this.http.get<TrainSeat[]>(`${environment.apiUrl}/admin/train-seats/schedule/${scheduleId}`);
+  }
+
+  createTrainSeat(seat: Partial<TrainSeat>): Observable<TrainSeat> {
+    return this.http.post<TrainSeat>(`${environment.apiUrl}/admin/train-seats`, seat);
+  }
+
+  updateTrainSeat(seatId: number, seat: Partial<TrainSeat>): Observable<TrainSeat> {
+    return this.http.put<TrainSeat>(`${environment.apiUrl}/admin/train-seats/${seatId}`, seat);
+  }
+
+  deleteTrainSeat(seatId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/admin/train-seats/${seatId}`);
   }
 
   // TRAIN ROUTES (ADMIN)

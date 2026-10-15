@@ -1,13 +1,14 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { TrainService } from '../../../core/services/train.service';
-import { Train } from '../../../core/models/train.model';
+import { StationService } from '../../../core/services/station.service';
+import { Train, Station } from '../../../core/models/train.model';
 
 @Component({
   selector: 'app-trains',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   template: `
     <div class="page-header">
       <h2>🚂 Manage Trains</h2>
@@ -33,12 +34,22 @@ import { Train } from '../../../core/models/train.model';
                 <input [(ngModel)]="form.totalDistance" name="dist" type="number" placeholder="1400" class="form-control" />
               </div>
               <div class="form-group">
-                <label>Source Station ID</label>
-                <input [(ngModel)]="form.sourceStationId" name="srcId" type="number" placeholder="Station ID" class="form-control" />
+                <label>Source Station</label>
+                <select [(ngModel)]="form.sourceStationId" name="srcId" class="form-control">
+                  <option [ngValue]="undefined">-- Select Source Station --</option>
+                  @for (s of stations(); track s.id) {
+                    <option [ngValue]="s.id">{{ s.name }} ({{ s.code }})</option>
+                  }
+                </select>
               </div>
               <div class="form-group">
-                <label>Destination Station ID</label>
-                <input [(ngModel)]="form.destinationStationId" name="dstId" type="number" placeholder="Station ID" class="form-control" />
+                <label>Destination Station</label>
+                <select [(ngModel)]="form.destinationStationId" name="dstId" class="form-control">
+                  <option [ngValue]="undefined">-- Select Destination Station --</option>
+                  @for (s of stations(); track s.id) {
+                    <option [ngValue]="s.id">{{ s.name }} ({{ s.code }})</option>
+                  }
+                </select>
               </div>
             </div>
             @if (formError()) { <div class="alert alert-error">{{ formError() }}</div> }
@@ -54,7 +65,18 @@ import { Train } from '../../../core/models/train.model';
     }
 
     @if (loading()) { <div class="loading">Loading trains...</div> }
-    @if (error()) { <div class="alert alert-error">{{ error() }}</div> }
+    @if (successMessage()) {
+      <div class="alert alert-success">
+        <span>{{ successMessage() }}</span>
+        <button type="button" class="close-btn" (click)="successMessage.set('')">✕</button>
+      </div>
+    }
+    @if (error()) {
+      <div class="alert alert-error">
+        <span>{{ error() }}</span>
+        <button type="button" class="close-btn" (click)="error.set('')">✕</button>
+      </div>
+    }
 
     <div class="table-card">
       <table class="data-table">
@@ -70,13 +92,23 @@ import { Train } from '../../../core/models/train.model';
               <td><span class="badge">{{ t.number }}</span></td>
               <td>{{ t.name }}</td>
               <td>{{ t.totalDistance }} km</td>
-              <td>{{ t.sourceStation?.code || '—' }}</td>
-              <td>{{ t.destinationStation?.code || '—' }}</td>
+              <td>
+                <span class="station-name">{{ t.sourceStation?.name || t.sourceStation?.code || '—' }}</span>
+                @if (t.sourceStation?.code && t.sourceStation?.name) {
+                  <span class="station-code">({{ t.sourceStation?.code }})</span>
+                }
+              </td>
+              <td>
+                <span class="station-name">{{ t.destinationStation?.name || t.destinationStation?.code || '—' }}</span>
+                @if (t.destinationStation?.code && t.destinationStation?.name) {
+                  <span class="station-code">({{ t.destinationStation?.code }})</span>
+                }
+              </td>
               <td class="actions">
-                <a [routerLink]="['/admin/trains', t.id, 'routes']" class="btn-route">🛤️ Stops</a>
-                <a [routerLink]="['/admin/trains', t.id, 'schedules']" class="btn-schedule">📅 Dates</a>
-                <button (click)="openEdit(t)" class="btn-edit">Edit</button>
-                <button (click)="deleteTrain(t.id)" class="btn-delete">Delete</button>
+                <button type="button" (click)="goToRoutes(t.id)" class="btn-route" title="Manage Route Stops">🛤️ Stops</button>
+                <button type="button" (click)="goToSchedules(t.id)" class="btn-schedule" title="Manage Schedule Dates">📅 Dates</button>
+                <button type="button" (click)="openEdit(t)" class="btn-edit">Edit</button>
+                <button type="button" (click)="deleteTrain(t.id)" class="btn-delete">Delete</button>
               </td>
             </tr>
           }
@@ -91,18 +123,21 @@ import { Train } from '../../../core/models/train.model';
     .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
     .page-header h2 { color:#1a237e; font-size:1.8rem; }
     .btn-primary { background:#1a237e; color:white; padding:0.6rem 1.25rem; border:none; border-radius:6px; cursor:pointer; font-weight:600; }
-    .loading { text-align:center; padding:2rem; color:#555; }
-    .alert-error { background:#ffebee; color:#c62828; padding:0.75rem 1rem; border-radius:6px; margin-bottom:1rem; }
+    .alert-success { background:#e8f5e9; color:#2e7d32; padding:0.75rem 1rem; border-radius:6px; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; font-weight:500; }
+    .alert-error { background:#ffebee; color:#c62828; padding:0.75rem 1rem; border-radius:6px; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; font-weight:500; }
+    .close-btn { background:none; border:none; color:inherit; font-weight:bold; cursor:pointer; font-size:1.1rem; margin-left:1rem; line-height:1; }
     .table-card { background:white; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08); overflow:auto; }
     .data-table { width:100%; border-collapse:collapse; }
     .data-table th { background:#1a237e; color:white; padding:0.75rem 1rem; text-align:left; font-size:0.85rem; }
     .data-table td { padding:0.75rem 1rem; border-bottom:1px solid #f0f0f0; font-size:0.9rem; }
     .data-table tr:hover td { background:#f8f9ff; }
     .badge { background:#e8eaf6; color:#1a237e; padding:0.2rem 0.5rem; border-radius:4px; font-size:0.8rem; font-weight:600; }
+    .station-name { font-weight: 600; color: #1a237e; }
+    .station-code { color: #555; font-size: 0.8rem; margin-left: 0.35rem; background: #e8eaf6; padding: 0.15rem 0.4rem; border-radius: 4px; }
     .actions { display:flex; gap:0.4rem; align-items:center; }
-    .btn-route { background:#e8eaf6; color:#1a237e; padding:0.35rem 0.65rem; border-radius:4px; text-decoration:none; font-weight:600; font-size:0.82rem; }
+    .btn-route { background:#e8eaf6; color:#1a237e; border:none; padding:0.35rem 0.65rem; border-radius:4px; cursor:pointer; font-weight:600; font-size:0.82rem; }
     .btn-route:hover { background:#c5cae9; }
-    .btn-schedule { background:#e8f5e9; color:#2e7d32; padding:0.35rem 0.65rem; border-radius:4px; text-decoration:none; font-weight:600; font-size:0.82rem; }
+    .btn-schedule { background:#e8f5e9; color:#2e7d32; border:none; padding:0.35rem 0.65rem; border-radius:4px; cursor:pointer; font-weight:600; font-size:0.82rem; }
     .btn-schedule:hover { background:#c8e6c9; }
     .btn-edit { background:#fff8e1; color:#f57f17; border:none; padding:0.35rem 0.75rem; border-radius:4px; cursor:pointer; font-weight:600; font-size:0.82rem; }
     .btn-delete { background:#ffebee; color:#c62828; border:none; padding:0.35rem 0.75rem; border-radius:4px; cursor:pointer; font-weight:600; font-size:0.82rem; }
@@ -123,36 +158,102 @@ import { Train } from '../../../core/models/train.model';
 })
 export class TrainsComponent implements OnInit {
   private trainService = inject(TrainService);
+  private stationService = inject(StationService);
+  private router = inject(Router);
+
+  goToRoutes(trainId: number): void {
+    this.router.navigate(['/admin/trains', trainId, 'routes']);
+  }
+
+  goToSchedules(trainId: number): void {
+    this.router.navigate(['/admin/trains', trainId, 'schedules']);
+  }
 
   trains = signal<Train[]>([]);
+  stations = signal<Station[]>([]);
   loading = signal(true);
   error = signal('');
+  successMessage = signal('');
   showForm = signal(false);
   editing = signal<Train | null>(null);
   saving = signal(false);
   formError = signal('');
   form: any = {};
 
-  ngOnInit(): void { this.loadTrains(); }
+  ngOnInit(): void {
+    this.loadTrains();
+    this.loadStations();
+  }
 
   loadTrains(): void {
     this.loading.set(true);
     this.trainService.getAllTrains().subscribe({
-      next: res => { this.trains.set(Array.isArray(res) ? res : ((res as any).content ?? [])); this.loading.set(false); },
-      error: err => { this.error.set(err.error?.message || 'Failed to load trains.'); this.loading.set(false); }
+      next: res => {
+        this.trains.set(Array.isArray(res) ? res : ((res as any).content ?? []));
+        this.loading.set(false);
+      },
+      error: err => {
+        this.error.set(err.error?.message || 'Failed to load trains.');
+        this.loading.set(false);
+      }
     });
   }
 
-  openAdd(): void { this.editing.set(null); this.form = {}; this.showForm.set(true); }
-  openEdit(t: Train): void { this.editing.set(t); this.form = { ...t }; this.showForm.set(true); }
-  closeForm(): void { this.showForm.set(false); this.formError.set(''); }
+  loadStations(): void {
+    this.stationService.getStations(0, 500).subscribe({
+      next: res => this.stations.set(res.content ?? []),
+      error: () => {}
+    });
+  }
+
+  openAdd(): void {
+    this.editing.set(null);
+    this.form = {
+      number: '',
+      name: '',
+      totalDistance: null,
+      sourceStationId: undefined,
+      destinationStationId: undefined
+    };
+    this.showForm.set(true);
+  }
+
+  openEdit(t: Train): void {
+    this.editing.set(t);
+    this.form = {
+      ...t,
+      sourceStationId: t.sourceStation?.id,
+      destinationStationId: t.destinationStation?.id
+    };
+    this.showForm.set(true);
+  }
+
+  closeForm(): void {
+    this.showForm.set(false);
+    this.formError.set('');
+  }
 
   save(): void {
-    this.saving.set(true);
     this.formError.set('');
+    const num = (this.form.number || '').trim();
+
+    if (!num) {
+      this.formError.set('Train number is required.');
+      return;
+    }
+
+    if (!this.editing()) {
+      const exists = this.trains().find(t => t.number?.trim().toLowerCase() === num.toLowerCase());
+      if (exists) {
+        this.formError.set(`A train with number '${num}' already exists (ID: #${exists.id} - ${exists.name}).`);
+        return;
+      }
+    }
+
+    this.saving.set(true);
     const payload: any = {
-      number: this.form.number,
-      name: this.form.name,
+      number: num,
+      name: (this.form.name || '').trim(),
       totalDistance: this.form.totalDistance
     };
     if (this.form.sourceStationId) {
@@ -166,16 +267,41 @@ export class TrainsComponent implements OnInit {
       ? this.trainService.updateTrain(this.editing()!.id, payload)
       : this.trainService.createTrain(payload);
     obs.subscribe({
-      next: () => { this.saving.set(false); this.closeForm(); this.loadTrains(); },
-      error: err => { this.formError.set(err.error?.message || 'Save failed.'); this.saving.set(false); }
+      next: () => {
+        this.saving.set(false);
+        this.closeForm();
+        this.loadTrains();
+      },
+      error: err => {
+        this.formError.set(err.error?.message || 'Save failed.');
+        this.saving.set(false);
+      }
     });
   }
 
   deleteTrain(id: number): void {
-    if (!confirm('Delete this train?')) return;
+    const trainToDelete = this.trains().find(t => t.id === id);
+    const label = trainToDelete ? `"${trainToDelete.name}" (${trainToDelete.number})` : `Train ID #${id}`;
+    if (!confirm(`Are you sure you want to delete train ${label}?`)) return;
+
+    this.error.set('');
+    this.successMessage.set('');
+
     this.trainService.deleteTrain(id).subscribe({
-      next: () => this.trains.update(prev => prev.filter(t => t.id !== id)),
-      error: err => this.error.set(err.error?.message || 'Delete failed.')
+      next: (res: any) => {
+        this.trains.update(prev => prev.filter(t => t.id !== id));
+        const backendMsg = res?.body?.message || res?.message;
+        const status = res?.status ? ` [HTTP ${res.status}]` : '';
+        this.successMessage.set(
+          backendMsg
+            ? `✅ ${backendMsg}`
+            : `✅ Train ${label} deleted successfully${status}.`
+        );
+      },
+      error: err => {
+        const errorMsg = err.error?.message || err.error?.error || err.message || 'Delete failed.';
+        this.error.set(`❌ Failed to delete train ${label}: ${errorMsg}`);
+      }
     });
   }
 }

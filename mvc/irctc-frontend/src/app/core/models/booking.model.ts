@@ -15,36 +15,42 @@ export interface BookingRequest {
   trainScheduleId: number;
   sourceStationId: number;
   destinationStationId: number;
+  trainId?: number;
+  journeyDate?: string;
   coachType: CoachType;
   passengers: PassengerRequest[];
 }
 
 export interface PassengerResponse {
+  id?: number;
   name: string;
   age: number;
   gender: string;
-  coachType: CoachType;
+  coachType?: CoachType;
+  coachId?: string;
   seatNumber: string;
 }
 
 export interface BookingResponse {
-  id: number;
+  id?: number;
+  bookingId?: number;
   pnr: string;
-  trainName: string;
-  trainNumber: string;
+  trainName?: string;
+  trainNumber?: string;
   sourceStation: Station | null;
   destinationStation: Station | null;
   journeyDate: string;
-  departureTime: string;
-  arrivalTime: string;
+  departureTime?: string;
+  arrivalTime?: string;
   totalFare: number;
   bookingStatus: BookingStatus;
   paymentStatus: PaymentStatus;
   passengers: PassengerResponse[];
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface FeedbackRequest {
+  userId?: number;
   title: string;
   description: string;
   rating: number;
@@ -63,9 +69,13 @@ export interface FeedbackResponse {
 
 export interface PagedResponse<T> {
   content: T[];
-  pageNumber: number;
-  pageSize: number;
+  page?: number;
+  pageNumber?: number;
+  size?: number;
+  pageSize?: number;
   totalElements: number;
   totalPages: number;
-  lastPage: boolean;
+  last?: boolean;
+  lastPage?: boolean;
+  first?: boolean;
 }

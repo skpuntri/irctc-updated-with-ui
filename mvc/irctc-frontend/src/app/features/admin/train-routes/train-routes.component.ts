@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TrainService } from '../../../core/services/train.service';
@@ -87,8 +87,8 @@ import { Train, TrainRoute, Station } from '../../../core/models/train.model';
           @for (r of sortedRoutes(); track r.id) {
             <tr>
               <td><span class="order-badge">#{{ r.stationOrder }}</span></td>
-              <td><strong>{{ r.station.name }}</strong></td>
-              <td><span class="code-badge">{{ r.station.code }}</span></td>
+              <td><strong>{{ r.station.name || 'Station' }}</strong></td>
+              <td><span class="code-badge">{{ r.station.code || '—' }}</span></td>
               <td>{{ r.arrivalTime || '--:--' }}</td>
               <td>{{ r.departureTime || '--:--' }}</td>
               <td>{{ r.haltMinutes }} min</td>
@@ -155,14 +155,32 @@ export class TrainRoutesComponent implements OnInit {
   formError = signal('');
   form: any = {};
 
-  get sortedRoutes() {
-    return () => [...this.routes()].sort((a, b) => (a.stationOrder || 0) - (b.stationOrder || 0));
-  }
+  sortedRoutes = computed(() =>
+    [...this.routes()].sort((a, b) => (a.stationOrder || 0) - (b.stationOrder || 0))
+  );
 
   ngOnInit(): void {
+    const getTrainId = () => {
+      return Number(
+        this.route.snapshot.params['trainId'] ||
+        this.route.snapshot.paramMap.get('trainId') ||
+        this.route.parent?.snapshot.params['trainId'] ||
+        0
+      );
+    };
+
+    const initialId = getTrainId();
+    if (initialId) {
+      this.trainId = initialId;
+      this.loadTrain();
+      this.loadRoutes();
+      this.loadStations();
+    }
+
     this.route.params.subscribe(params => {
-      this.trainId = Number(params['trainId']);
-      if (this.trainId) {
+      const id = Number(params['trainId'] || this.route.parent?.snapshot.params['trainId']);
+      if (id && id !== this.trainId) {
+        this.trainId = id;
         this.loadTrain();
         this.loadRoutes();
         this.loadStations();

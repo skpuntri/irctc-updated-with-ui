@@ -65,15 +65,21 @@ export const routes: Routes = [
       },
       {
         path: 'trains',
-        loadComponent: () => import('./features/admin/trains/trains.component').then(m => m.TrainsComponent)
-      },
-      {
-        path: 'trains/:trainId/routes',
-        loadComponent: () => import('./features/admin/train-routes/train-routes.component').then(m => m.TrainRoutesComponent)
-      },
-      {
-        path: 'trains/:trainId/schedules',
-        loadComponent: () => import('./features/admin/train-schedules/train-schedules.component').then(m => m.TrainSchedulesComponent)
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            loadComponent: () => import('./features/admin/trains/trains.component').then(m => m.TrainsComponent)
+          },
+          {
+            path: ':trainId/routes',
+            loadComponent: () => import('./features/admin/train-routes/train-routes.component').then(m => m.TrainRoutesComponent)
+          },
+          {
+            path: ':trainId/schedules',
+            loadComponent: () => import('./features/admin/train-schedules/train-schedules.component').then(m => m.TrainSchedulesComponent)
+          }
+        ]
       },
       {
         path: 'stations',

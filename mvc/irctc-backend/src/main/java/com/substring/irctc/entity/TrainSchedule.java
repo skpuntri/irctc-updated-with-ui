@@ -33,7 +33,7 @@ public class TrainSchedule {
 
     // kitni seat ki type :
 
-    @OneToMany(mappedBy = "trainSchedule")
+    @OneToMany(mappedBy = "trainSchedule", cascade = CascadeType.ALL)
     private List<TrainSeat> trainSeats;
 
 

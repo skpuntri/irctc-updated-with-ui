@@ -52,6 +52,13 @@ public class GloablExceptionHandler {
 
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalStateException(IllegalStateException exception) {
+        ErrorResponse response = new ErrorResponse(exception.getMessage(), "409", false);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponse> handleSQLIntegrityConstraintViolationException(DataIntegrityViolationException exception) {
 

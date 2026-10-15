@@ -39,6 +39,10 @@ public class TrainServiceImpl implements TrainService {
         Station sourceStation = stationRepository.findById(trainDTO.getSourceStation().getId()).orElseThrow(() -> new ResourceNotFoundException("Source station not found with id: " + trainDTO.getSourceStation().getId()));
         Station destinationStation = stationRepository.findById(trainDTO.getDestinationStation().getId()).orElseThrow(() -> new ResourceNotFoundException("Destination station not found with id: " + trainDTO.getDestinationStation().getId()));
         Train train = modelMapper.map(trainDTO, Train.class);
+        boolean b = trainRepository.existsByNumber(trainDTO.getNumber());
+        if (b) {
+            throw new RuntimeException("Train number already exists already exists!");
+        }
         train.setSourceStation(sourceStation);
         train.setDestinationStation(destinationStation);
         Train savedTrain = trainRepository.save(train);

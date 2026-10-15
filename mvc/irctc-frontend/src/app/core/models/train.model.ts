@@ -35,6 +35,7 @@ export interface TrainRoute {
 
 export interface TrainSeat {
   id: number;
+  trainScheduleId?: number;
   coachType: CoachType;
   totalSeats: number;
   availableSeats: number;

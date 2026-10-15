@@ -14,4 +14,5 @@ public interface TrainRepository extends JpaRepository<Train, Long> {
     List<Train> findTrainBySourceAndDestination(@Param("sourceStationId") Long sourceStationId, @Param("destinationStationId") Long destinationStationId);
 
 
+    boolean existsByNumber(String number);
 }

@@ -2,3 +2,6 @@
 docker/mongo-data/
 docker/postgres-data/
 mvc/irctc_copy/
+*.log
+mvc/irctc-backend/logs/irctc.log
+*.log

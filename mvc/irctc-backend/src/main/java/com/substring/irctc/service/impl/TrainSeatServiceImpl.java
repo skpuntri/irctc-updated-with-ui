@@ -36,6 +36,9 @@ public class TrainSeatServiceImpl implements TrainSeatService {
 
         TrainSchedule trainSchedule = trainScheduleRepository.findById(trainSeatDto.getTrainScheduleId()).orElseThrow(() -> new ResourceNotFoundException("Train Schedule not found with id: " + trainSeatDto.getTrainScheduleId()));
         TrainSeat trainSeat = modelMapper.map(trainSeatDto, TrainSeat.class);
+        if (trainSeat.getSeatNumberToAssign() == null) {
+            trainSeat.setSeatNumberToAssign(1);
+        }
         trainSeat.setTrainSchedule(trainSchedule);
         TrainSeat savedTrainSeat = trainSeatRepository.save(trainSeat);
         return modelMapper.map(savedTrainSeat, TrainSeatDto.class);
@@ -64,7 +67,9 @@ public class TrainSeatServiceImpl implements TrainSeatService {
         trainSeat.setAvailableSeats(trainSeatDto.getAvailableSeats());
         trainSeat.setPrice(trainSeatDto.getPrice());
         trainSeat.setTotalSeats(trainSeatDto.getTotalSeats());
-        trainSeat.setSeatNumberToAssign(trainSeatDto.getSeatNumberToAssign());
+        if (trainSeatDto.getSeatNumberToAssign() != null) {
+            trainSeat.setSeatNumberToAssign(trainSeatDto.getSeatNumberToAssign());
+        }
         trainSeat.setTrainSeatOrder(trainSeatDto.getTrainSeatOrder());
         TrainSeat updatedTrainSeat = trainSeatRepository.save(trainSeat);
         return modelMapper.map(updatedTrainSeat, TrainSeatDto.class);

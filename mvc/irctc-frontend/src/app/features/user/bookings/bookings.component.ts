@@ -27,30 +27,30 @@ import { RouterLink } from '@angular/router';
       </div>
     }
     <div class="bookings-list">
-      @for (b of bookings(); track b.id) {
+      @for (b of bookings(); track (b.id || b.bookingId || b.pnr)) {
         <div class="booking-card">
           <div class="booking-header">
             <div>
               <span class="pnr">PNR: {{ b.pnr }}</span>
-              <h3>{{ b.trainName }} ({{ b.trainNumber }})</h3>
+              <h3>{{ b.trainName || 'Express Train' }} {{ b.trainNumber ? '(' + b.trainNumber + ')' : '' }}</h3>
             </div>
             <div class="badges">
-              <span class="badge" [class]="'badge-' + b.bookingStatus.toLowerCase()">
-                {{ b.bookingStatus }}
+              <span class="badge" [class]="'badge-' + (b.bookingStatus || 'CONFIRMED').toLowerCase()">
+                {{ b.bookingStatus || 'CONFIRMED' }}
               </span>
-              <span class="badge" [class]="'badge-pay-' + b.paymentStatus.toLowerCase()">
-                {{ b.paymentStatus }}
+              <span class="badge" [class]="'badge-pay-' + (b.paymentStatus || 'NOT_PAID').toLowerCase()">
+                {{ b.paymentStatus || 'NOT_PAID' }}
               </span>
             </div>
           </div>
           <div class="booking-details">
             <div class="detail">
               <label>From</label>
-              <span>{{ b.sourceStation?.name }}</span>
+              <span>{{ b.sourceStation?.name || 'Origin Station' }}</span>
             </div>
             <div class="detail">
               <label>To</label>
-              <span>{{ b.destinationStation?.name }}</span>
+              <span>{{ b.destinationStation?.name || 'Destination Station' }}</span>
             </div>
             <div class="detail">
               <label>Date</label>
@@ -63,8 +63,8 @@ import { RouterLink } from '@angular/router';
           </div>
           <div class="passengers">
             <label>Passengers:</label>
-            @for (p of b.passengers; track p.seatNumber) {
-              <span class="passenger-chip">{{ p.name }} · {{ p.coachType }} · Seat {{ p.seatNumber }}</span>
+            @for (p of b.passengers; track (p.seatNumber || p.name || $index)) {
+              <span class="passenger-chip">{{ p.name }} · {{ p.coachType || 'Coach' }} · Seat {{ p.seatNumber }}</span>
             }
           </div>
         </div>
@@ -111,8 +111,9 @@ export class BookingsComponent implements OnInit {
   error = signal('');
 
   ngOnInit(): void {
-    // NOTE: Backend doesn't yet have GET /user/bookings endpoint — showing empty state
-    // When backend adds it, call: this.bookingService.getMyBookings(userId)
+    const user = this.authService.currentUser();
+    const list = this.bookingService.getUserBookings(user?.id);
+    this.bookings.set(list);
     this.loading.set(false);
   }
 }

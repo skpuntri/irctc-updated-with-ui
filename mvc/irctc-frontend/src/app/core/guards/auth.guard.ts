@@ -21,11 +21,11 @@ export const adminGuard: CanActivateFn = () => {
   return false;
 };
 
-/** Protects routes that require ROLE_NORMAL */
+/** Protects routes that require ROLE_NORMAL or ROLE_ADMIN */
 export const userGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);
-  if (auth.isNormalUser()) return true;
+  if (auth.isNormalUser() || auth.isAdmin()) return true;
   if (!auth.isLoggedIn()) router.navigate(['/auth/login']);
   else router.navigate(['/unauthorized']);
   return false;
