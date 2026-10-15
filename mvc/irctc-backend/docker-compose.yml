@@ -8,21 +8,21 @@ services:
       - "3309:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: irctcdb
+      MYSQL_DATABASE: backendx_irctc
     networks:
       - irctc-network
     volumes:
       - mysql-db-data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
 
   boot-app:
-#    Dockerfile that is present in same directory
     build: .
-    image: irctc-backend   # ✅ Optional, name your built image
+    image: irctc-backend
     container_name: irctc-backend
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/irctcdb
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/backendx_irctc?allowPublicKeyRetrieval=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     depends_on:
