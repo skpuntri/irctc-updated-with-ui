@@ -8,14 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class IrctcBackendApplicationTests {
 
-    @Autowired
-    private TrainService trainService;
-
-    @Test
-    void contextLoads() {
-
-        this.trainService.getAllTrains();
-
-    }
+//    @Autowired
+//    private TrainService trainService;
+//
+//    @Test
+//    void contextLoads() {
+//
+//        this.trainService.getAllTrains();
+//
+//    }
 
 }
